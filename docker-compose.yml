@@ -1,0 +1,11 @@
+version: '2'
+services:
+  bme680:
+    build: .
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - 5555:5555
+    devices:
+      - /dev/i2c-1:/dev/i2c-1
