@@ -1,8 +1,7 @@
-FROM python:3.9-slim
+FROM python:3.9-buster
 WORKDIR /app
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev
 RUN pip3 install bme680 flask
 COPY . .
 
