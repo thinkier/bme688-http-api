@@ -1,9 +1,8 @@
 FROM python:3.9-slim
-RUN pip3 install bme680 flask
-
+WORKDIR /app
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /app
+RUN pip3 install bme680 flask
 COPY . .
 
 CMD python3 main.py
