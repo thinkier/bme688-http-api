@@ -5,6 +5,7 @@ from flask import Flask, jsonify
 
 # How much humidity should contribute to the IAQ score
 hum_weight = 0.25
+gas_weight = 1 - hum_weight
 # The ideal humidity
 hum_baseline = 40.0
 # Your gas resistance may be different, I've calibrated it against my room while well-ventilated
@@ -36,12 +37,17 @@ def report_json():
 
         if sensor.data.heat_stable:
             data['gas_resistance'] = sensor.data.gas_resistance
-            air_quality = 5
-            air_quality -= 5 * hum_weight * \
-                           abs(sensor.data.humidity - hum_baseline) / hum_baseline
-            air_quality -= 5 * (1 - hum_weight) * \
-                           sensor.data.gas_resistance / gas_resistance_baseline
-            data['air_quality'] = air_quality
+
+            hum_delta = abs(sensor.data.humidity - hum_baseline)
+            gas_delta = sensor.data.gas_resistance - gas_resistance_baseline
+
+            air_quality = hum_weight * hum_delta / hum_baseline
+            if gas_delta > 0:
+                air_quality += gas_weight * gas_delta / gas_resistance_baseline
+            else:
+                air_quality += gas_weight
+
+            data['air_quality'] = 5 * air_quality
 
         return jsonify(data)
 
