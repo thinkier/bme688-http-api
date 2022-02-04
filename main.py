@@ -38,7 +38,7 @@ def report_json():
             data['gas_resistance'] = sensor.data.gas_resistance
             air_quality = 5
             air_quality -= 5 * hum_weight * \
-                           abs(hum_baseline - sensor.data.humidity) * hum_weight
+                           abs(sensor.data.humidity - hum_baseline) / hum_baseline
             air_quality -= 5 * (1 - hum_weight) * \
                            sensor.data.gas_resistance / gas_resistance_baseline
             data['air_quality'] = air_quality
