@@ -26,9 +26,9 @@ sensor.select_gas_heater_profile(0)
 
 sensor.get_sensor_data()
 while not sensor.data.heat_stable:
-    print("Waiting for gas sensor to heat up...\n")
-    sensor.get_sensor_data()
+    print("Waiting for gas sensor to heat up...")
     time.sleep(5)
+    sensor.get_sensor_data()
 
 app = Flask(__name__)
 
