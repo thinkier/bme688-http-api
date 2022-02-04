@@ -46,12 +46,13 @@ def report_json():
             if gas_delta > 0:
                 air_quality -= gas_weight * gas_delta / gas_resistance_baseline
 
+            air_quality *= 5
             if air_quality < 1:
                 air_quality = 1
             elif air_quality > 5:
                 air_quality = 5
 
-            data['air_quality'] = 5 * air_quality
+            data['air_quality'] = air_quality
 
         return jsonify(data)
 
