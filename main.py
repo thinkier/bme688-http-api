@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
+import time
+
 from bme680 import *
 from flask import Flask, jsonify
-import time
 
 # How much humidity should contribute to the IAQ score
 hum_weight = 0.25
@@ -52,9 +53,10 @@ def report_json():
             if gas_delta > 0:
                 air_quality += gas_weight * gas_delta / gas_resistance_baseline
 
-            air_quality *= 5
-            if air_quality < 0:
-                air_quality = 0
+            air_quality *= 4
+            air_quality += 1
+            if air_quality < 1:
+                air_quality = 1
             elif air_quality > 5:
                 air_quality = 5
 
