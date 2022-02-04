@@ -47,8 +47,8 @@ def report_json():
                 air_quality -= gas_weight * gas_delta / gas_resistance_baseline
 
             air_quality *= 5
-            if air_quality < 1:
-                air_quality = 1
+            if air_quality < 0:
+                air_quality = 0
             elif air_quality > 5:
                 air_quality = 5
 
