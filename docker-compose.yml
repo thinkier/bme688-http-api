@@ -1,7 +1,7 @@
 version: '2'
 services:
   bme680:
-    build: .
+    image: ghcr.io/thinkier/bme688-http-api
     restart: always
     environment:
       - PYTHONUNBUFFERED=1
