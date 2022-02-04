@@ -41,11 +41,15 @@ def report_json():
             hum_delta = abs(sensor.data.humidity - hum_baseline)
             gas_delta = sensor.data.gas_resistance - gas_resistance_baseline
 
-            air_quality = hum_weight * hum_delta / hum_baseline
+            air_quality = gas_weight
+            air_quality += hum_weight * hum_delta / hum_baseline
             if gas_delta > 0:
-                air_quality += gas_weight * gas_delta / gas_resistance_baseline
-            else:
-                air_quality += gas_weight
+                air_quality -= gas_weight * gas_delta / gas_resistance_baseline
+
+            if air_quality < 1:
+                air_quality = 1
+            elif air_quality > 5:
+                air_quality = 5
 
             data['air_quality'] = 5 * air_quality
 
