@@ -3,6 +3,13 @@
 from bme680 import *
 from flask import Flask, jsonify
 
+# How much humidity should contribute to the IAQ score
+hum_weight = 0.25
+# The ideal humidity
+hum_baseline = 40.0
+# Your gas resistance may be different, I've calibrated it against my room while well-ventilated
+gas_resistance_baseline = 8e4
+
 sensor = BME680(I2C_ADDR_PRIMARY)
 
 sensor.set_humidity_oversample(OS_2X)
@@ -29,6 +36,12 @@ def report_json():
 
         if sensor.data.heat_stable:
             data['gas_resistance'] = sensor.data.gas_resistance
+            air_quality = 5
+            air_quality -= 5 * hum_weight * \
+                           abs(hum_baseline - sensor.data.humidity) * hum_weight
+            air_quality -= 5 * (1 - hum_weight) * \
+                           sensor.data.gas_resistance / gas_resistance_baseline
+            data['air_quality'] = air_quality
 
         return jsonify(data)
 

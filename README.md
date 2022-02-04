@@ -12,3 +12,6 @@ Expose data from a BME688 chip to an HTTP API.
 - `python3`
 - `bme680` (via pip3)
 - `flask` (via pip3)
+
+## References
+Humidity code is based on the one [designed by Pimoroni, (c) 2021, MIT Licensed](https://github.com/pimoroni/bme680-python/blob/master/examples/indoor-air-quality.py)
