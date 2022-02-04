@@ -2,7 +2,6 @@
 
 from flask import Flask, jsonify
 from bme680 import *
-from time import sleep
 
 sensor = BME680(I2C_ADDR_PRIMARY)
 
