@@ -23,6 +23,7 @@ sensor.set_gas_heater_temperature(320)
 sensor.set_gas_heater_duration(150)
 sensor.select_gas_heater_profile(0)
 
+sensor.get_sensor_data()
 app = Flask(__name__)
 
 
