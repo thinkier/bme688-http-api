@@ -2,6 +2,7 @@
 
 from bme680 import *
 from flask import Flask, jsonify
+import time
 
 # How much humidity should contribute to the IAQ score
 hum_weight = 0.25
@@ -24,6 +25,11 @@ sensor.set_gas_heater_duration(150)
 sensor.select_gas_heater_profile(0)
 
 sensor.get_sensor_data()
+while not sensor.data.heat_stable:
+    print("Waiting for gas sensor to heat up...\n")
+    sensor.get_sensor_data()
+    time.sleep(5)
+
 app = Flask(__name__)
 
 
