@@ -10,7 +10,7 @@ gas_weight = 1 - hum_weight
 # The ideal humidity
 hum_baseline = 40.0
 # Your gas resistance may be different, I've calibrated it against my room while well-ventilated
-gas_resistance_baseline = 8e4
+gas_resistance_baseline = 8.5e4
 
 sensor = BME680(I2C_ADDR_PRIMARY)
 
