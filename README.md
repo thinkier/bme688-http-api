@@ -1,17 +1,14 @@
 # bme688-http-api
+
 Expose data from a BME688 chip to an HTTP API.
 
 ## Usage
-1. Deploy the server, this can be done via 2 methods
-  - `docker-compose up` if you have docker on a Pi 4B (which this was tested against)
-    - Doesn't work on my Pi Zero W (gen 1) via docker
-  - `./main.py` if you have the dependencies installed via pip3
+
+1. Deploy the server using `./main.py`
 2. Navigate to `http://YOUR_PI_ADDRESS:5555/report.json`
 
 ## Dependencies
-- `python3`
-- `bme680` (via pip3)
-- `flask` (via pip3)
 
-## References
-Humidity code is based on the one [designed by Pimoroni, (c) 2021, MIT Licensed](https://github.com/pimoroni/bme680-python/blob/master/examples/indoor-air-quality.py)
+- `python3`
+- `bme68x` (via [manual installation](https://github.com/pi3g/bme68x-python-library#how-to-install-the-extension-with-bsec))
+- `flask` (via pip3)
